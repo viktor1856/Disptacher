@@ -16,7 +16,7 @@ class NewAutoClass(QDialog, Ui_newAuto):
 
     def accept(self):
         pass
-        #test
+        #testfgf
 
     def _set_category_list(self):
         try:

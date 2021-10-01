@@ -15,7 +15,7 @@ class NewAutoClass(QDialog, Ui_newAuto):
             print('Error: NewAutoClass->__init__' + str(e))
 
     def accept(self):
-        print("тест закрытия формы")
+        print("здесь длжно все заработать")
 
 
     def _set_category_list(self):

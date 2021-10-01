@@ -16,7 +16,7 @@ class NewAutoClass(QDialog, Ui_newAuto):
 
     def accept(self):
         print("здесь нет лишних строк")
-
+        print('и еще один вывод')
 
     def _set_category_list(self):
         try:

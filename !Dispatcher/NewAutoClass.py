@@ -15,8 +15,8 @@ class NewAutoClass(QDialog, Ui_newAuto):
             print('Error: NewAutoClass->__init__' + str(e))
 
     def accept(self):
-        print("здесь длжно все заработать")
-
+        print("здесь нет лишних строк")
+        print('и еще один вывод')
 
 
 

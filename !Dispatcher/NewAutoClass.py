@@ -18,6 +18,9 @@ class NewAutoClass(QDialog, Ui_newAuto):
         print("здесь длжно все заработать")
 
 
+
+
+
     def _set_category_list(self):
         try:
             if self.typeAuto.currentText():

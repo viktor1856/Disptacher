@@ -14,19 +14,29 @@ class SqlLiteDb:
             print('Создаю новую БД')
             self.connection_db = sqlite3.connect(path + '\\DispatcherBase.db')
 
+    def insert_new_auto(self, param):
+        try:
+            cursor = self.connection_db.cursor()
+            cursor.execute("insert into autos(name_auto,type_auto, category_drivers, skzi, estr,"
+                           "gos_number ) "
+                           "values(:name_auto, :type_auto, :category, :skzi, :estr,"
+                           ":gos_number)", param)
+            cursor.close()
+            self.connection_db.commit()
+        except Exception as e:
+            print('Error: dbClass->insert_new_auto() ' + str(e))
+
     def select_category_auto(self, param):
         try:
             cursor = self.connection_db.cursor()
             if param == 'Прочее':
-                cursor.execute("select name from dictionary where kod_dict in (2,3)"
+                cursor.execute("select name,shifr from dictionary where kod_dict in (2,3)"
                                "order by name")
             else:
-                cursor.execute('select name from dictionary where id_parent =('
+                cursor.execute('select name, shifr from dictionary where id_parent =('
                                'select id_dict from dictionary where kod_dict  = 1 and '
                                ' name = :param) order by name', [param])
-            list_category_type = []
-            for category in cursor.fetchall():
-                list_category_type.append(category[0])
+            list_category_type = cursor.fetchall()
             cursor.close()
             return list_category_type
         except Exception as e:
@@ -35,7 +45,7 @@ class SqlLiteDb:
     def select_auto_type(self):
         try:
             cursor = self.connection_db.cursor()
-            cursor.execute('select name from dictionary where kod_dict = 1 order by name desc')
+            cursor.execute('select  name from dictionary where kod_dict = 1 order by name desc')
             list_auto_type = []
             for auto_type in cursor.fetchall():
                 list_auto_type.append(auto_type[0])
@@ -103,7 +113,7 @@ class SqlLiteDb:
 def main():
 
     test = SqlLiteDb()
-    sp = test.select_category_auto('')
+    sp = test.select_category_auto('Легковое ТС')
     print(sp)
 
 

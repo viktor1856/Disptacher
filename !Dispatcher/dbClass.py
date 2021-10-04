@@ -14,6 +14,12 @@ class SqlLiteDb:
             print('Создаю новую БД')
             self.connection_db = sqlite3.connect(path + '\\DispatcherBase.db')
 
+    def delete_auto(self, param):
+        cursor = self.connection_db.cursor()
+        cursor.execute("delete from autos where id_auto = :id_auto", param)
+        cursor.close()
+        self.connection_db.commit()
+
     def insert_new_auto(self, param):
         try:
             cursor = self.connection_db.cursor()

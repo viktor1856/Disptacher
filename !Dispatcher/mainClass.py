@@ -15,7 +15,6 @@ class MainClass(QtWidgets.QMainWindow, Ui_MainWindow):
         self.newAuto.triggered.connect(self.list_auto_form)
         self.newDriver.triggered.connect(self.list_drivers_form)
         # self.newAuto.triggered.connect(self.newAuto)
-        #test git tergtsdrgdwdw
 
     def list_auto_form(self):
         form = ListAutoClass(self.connectDb)

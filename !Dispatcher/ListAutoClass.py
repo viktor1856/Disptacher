@@ -9,8 +9,34 @@ class ListAutoClass(QDialog, Ui_autoList):
         self.setupUi(self)
         self.connect_db = in_connect_db
         self.newAuto.clicked.connect(self.new_auto_form)
-
+        self.deleteAuto.clicked.connect(self.delete_auto)
+        self.editAuto.clicked.connect(self.edit_auto)
         self.refresh_table()
+
+    def edit_auto(self):
+        try:
+            id_auto = int(self.tableAuto.model().index(self.tableAuto.currentIndex().row(), 0).data())
+            form = NewAutoClass(self.connect_db, id_auto=id_auto)
+            if form.exec_() == form.Accepted:
+                self.refresh_table()
+        except Exception as e:
+            print('Error: ListAutoClass->edit_auto ' + str(e))
+
+    def delete_auto(self):
+        try:
+            id_auto = self.tableAuto.model().index(self.tableAuto.currentIndex().row(), 0).data()
+            if int(id_auto) > 0:
+                full_name_auto = (self.tableAuto.model().index(self.tableAuto.currentIndex().row(), 1).data() + ' ' +
+                                  self.tableAuto.model().index(self.tableAuto.currentIndex().row(), 2).data())
+                if QMessageBox.warning(self,
+                                       "Удаление транспортного средства",
+                                       "Вы уверены что хотите удалить Транспортное средство?\n" +
+                                       full_name_auto,
+                                       QMessageBox.Ok | QMessageBox.Cancel) == QMessageBox.Ok:
+                    self.connect_db.delete_auto(id_auto)
+                    self.refresh_table()
+        except Exception as e:
+            print('Error: ListAutoClass->deleteAuto ' + str(e))
 
     def refresh_table(self):
         try:

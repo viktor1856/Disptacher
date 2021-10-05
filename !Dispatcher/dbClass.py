@@ -14,6 +14,34 @@ class SqlLiteDb:
             print('Создаю новую БД')
             self.connection_db = sqlite3.connect(path + '\\DispatcherBase.db')
 
+    def select_auto_info(self, id_auto):
+        try:
+            cursor = self.connection_db.cursor()
+            cursor.execute('select * from autos where id_auto = :id_auto', [id_auto])
+            auto_info = cursor.fetchone()
+            cursor.close()
+            return auto_info
+        except Exception as e:
+            print('Error: db_class->select_auto_info ' + str(e))
+
+    def update_auto(self, params):
+        try:
+            cursor = self.connection_db.cursor()
+            cursor.execute("update autos set name_auto = :name_auto ,type_auto = :type_auto,"
+                           " category_drivers = :category_drivers, skzi = :skzi, estr = :estr,"
+                           "gos_number = :gos_number  where "
+                           "id_auto = :id_auto ", params)
+            cursor.close()
+            self.connection_db.commit()
+        except Exception as e:
+            print('Error: dbClass->update_auto() ' + str(e))
+
+    def delete_auto(self, param):
+        cursor = self.connection_db.cursor()
+        cursor.execute("delete from autos where id_auto = :id_auto", param)
+        cursor.close()
+        self.connection_db.commit()
+
     def insert_new_auto(self, param):
         try:
             cursor = self.connection_db.cursor()

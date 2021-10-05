@@ -10,7 +10,17 @@ class ListAutoClass(QDialog, Ui_autoList):
         self.connect_db = in_connect_db
         self.newAuto.clicked.connect(self.new_auto_form)
         self.deleteAuto.clicked.connect(self.delete_auto)
+        self.editAuto.clicked.connect(self.edit_auto)
         self.refresh_table()
+
+    def edit_auto(self):
+        try:
+            id_auto = int(self.tableAuto.model().index(self.tableAuto.currentIndex().row(), 0).data())
+            form = NewAutoClass(self.connect_db, id_auto=id_auto)
+            if form.exec_() == form.Accepted:
+                self.refresh_table()
+        except Exception as e:
+            print('Error: ListAutoClass->edit_auto ' + str(e))
 
     def delete_auto(self):
         try:

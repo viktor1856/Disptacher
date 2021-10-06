@@ -8,6 +8,12 @@ class ListCustomersClass(QDialog, Ui_customers):
         self.setupUi(self)
         self.connect_db = data_base_connection
         self.refresh_table()
+        self.insertCustomer.clicked.connect(self.insert_new_customer)
+
+    def insert_new_customer(self):
+        self.connect_db.insert_new_customer(self.lineEdit.text())
+        self.lineEdit.clear()
+        self.refresh_table()
 
     def refresh_table(self):
         try:

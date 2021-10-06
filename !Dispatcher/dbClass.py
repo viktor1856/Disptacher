@@ -14,6 +14,16 @@ class SqlLiteDb:
             print('Создаю новую БД')
             self.connection_db = sqlite3.connect(path + '\\DispatcherBase.db')
 
+    def insert_new_customer(self, param):
+        try:
+            cursor = self.connection_db.cursor()
+            cursor.execute("insert into customers(name_customer) "
+                           "values(:name_customer)", [param])
+            cursor.close()
+            self.connection_db.commit()
+        except Exception as e:
+            print('Error: dbClass->insert_new_customer() ' + str(e))
+
     def select_all_customers(self):
         try:
             cursor = self.connection_db.cursor()

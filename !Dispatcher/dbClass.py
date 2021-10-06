@@ -14,6 +14,16 @@ class SqlLiteDb:
             print('Создаю новую БД')
             self.connection_db = sqlite3.connect(path + '\\DispatcherBase.db')
 
+    def select_all_customers(self):
+        try:
+            cursor = self.connection_db.cursor()
+            cursor.execute('select * from customers')
+            customers_list = cursor.fetchall()
+            cursor.close()
+            return customers_list
+        except Exception as e:
+            print('Error: db_class->select_all_customers ' + str(e))
+
     def select_auto_info(self, id_auto):
         try:
             cursor = self.connection_db.cursor()

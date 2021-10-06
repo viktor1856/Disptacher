@@ -19,8 +19,16 @@ class Ui_customers(object):
         self.verticalLayout_2.setObjectName("verticalLayout_2")
         self.horizontalLayout = QtWidgets.QHBoxLayout()
         self.horizontalLayout.setObjectName("horizontalLayout")
-        self.listCustomers = QtWidgets.QListWidget(customers)
+        self.listCustomers = QtWidgets.QTableWidget(customers)
         self.listCustomers.setObjectName("listCustomers")
+        self.listCustomers.setColumnCount(2)
+        self.listCustomers.setRowCount(0)
+        item = QtWidgets.QTableWidgetItem()
+        self.listCustomers.setHorizontalHeaderItem(0, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.listCustomers.setHorizontalHeaderItem(1, item)
+        self.listCustomers.horizontalHeader().setVisible(True)
+        self.listCustomers.verticalHeader().setVisible(False)
         self.horizontalLayout.addWidget(self.listCustomers)
         self.verticalLayout = QtWidgets.QVBoxLayout()
         self.verticalLayout.setObjectName("verticalLayout")
@@ -49,6 +57,10 @@ class Ui_customers(object):
     def retranslateUi(self, customers):
         _translate = QtCore.QCoreApplication.translate
         customers.setWindowTitle(_translate("customers", "Список заказчиков"))
+        item = self.listCustomers.horizontalHeaderItem(0)
+        item.setText(_translate("customers", "№"))
+        item = self.listCustomers.horizontalHeaderItem(1)
+        item.setText(_translate("customers", "Заказчик"))
         self.updateCustomers.setText(_translate("customers", "Изменить\n"
 "заказчика"))
         self.deleteCustomer.setText(_translate("customers", "Удалить\n"

@@ -132,12 +132,72 @@
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
+        <property name="frameShape">
+         <enum>QFrame::StyledPanel</enum>
+        </property>
+        <property name="lineWidth">
+         <number>3</number>
+        </property>
+        <property name="midLineWidth">
+         <number>0</number>
+        </property>
+        <property name="dragEnabled">
+         <bool>false</bool>
+        </property>
+        <property name="alternatingRowColors">
+         <bool>false</bool>
+        </property>
+        <property name="showGrid">
+         <bool>true</bool>
+        </property>
+        <property name="gridStyle">
+         <enum>Qt::SolidLine</enum>
+        </property>
+        <property name="sortingEnabled">
+         <bool>false</bool>
+        </property>
+        <property name="wordWrap">
+         <bool>true</bool>
+        </property>
+        <attribute name="horizontalHeaderVisible">
+         <bool>true</bool>
+        </attribute>
+        <attribute name="horizontalHeaderCascadingSectionResizes">
+         <bool>false</bool>
+        </attribute>
+        <attribute name="horizontalHeaderHighlightSections">
+         <bool>true</bool>
+        </attribute>
+        <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
+         <bool>false</bool>
+        </attribute>
+        <attribute name="verticalHeaderVisible">
+         <bool>false</bool>
+        </attribute>
+        <attribute name="verticalHeaderCascadingSectionResizes">
+         <bool>false</bool>
+        </attribute>
         <attribute name="verticalHeaderStretchLastSection">
          <bool>false</bool>
         </attribute>
         <row>
          <property name="text">
           <string>1</string>
+         </property>
+        </row>
+        <row>
+         <property name="text">
+          <string>2</string>
+         </property>
+        </row>
+        <row>
+         <property name="text">
+          <string>3</string>
+         </property>
+        </row>
+        <row>
+         <property name="text">
+          <string>4</string>
          </property>
         </row>
         <column>
@@ -157,12 +217,12 @@
         </column>
         <column>
          <property name="text">
-          <string>Начало работы</string>
+          <string>Начало\n работы</string>
          </property>
         </column>
         <column>
          <property name="text">
-          <string>Конец работы</string>
+          <string>Заказчик</string>
          </property>
         </column>
         <column>
@@ -174,25 +234,300 @@
          <property name="text">
           <string>TOYOTA LAND CRUSER 200</string>
          </property>
+         <property name="background">
+          <brush brushstyle="SolidPattern">
+           <color alpha="120">
+            <red>0</red>
+            <green>150</green>
+            <blue>0</blue>
+           </color>
+          </brush>
+         </property>
         </item>
         <item row="0" column="1">
          <property name="text">
           <string>Иванов И.И.</string>
+         </property>
+         <property name="background">
+          <brush brushstyle="SolidPattern">
+           <color alpha="120">
+            <red>0</red>
+            <green>150</green>
+            <blue>0</blue>
+           </color>
+          </brush>
          </property>
         </item>
         <item row="0" column="2">
          <property name="text">
           <string>цех №1 цех№2</string>
          </property>
+         <property name="background">
+          <brush brushstyle="SolidPattern">
+           <color alpha="120">
+            <red>0</red>
+            <green>150</green>
+            <blue>0</blue>
+           </color>
+          </brush>
+         </property>
+         <property name="foreground">
+          <brush brushstyle="NoBrush">
+           <color alpha="255">
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+           </color>
+          </brush>
+         </property>
         </item>
         <item row="0" column="3">
          <property name="text">
           <string>9:30</string>
          </property>
+         <property name="background">
+          <brush brushstyle="SolidPattern">
+           <color alpha="120">
+            <red>0</red>
+            <green>150</green>
+            <blue>0</blue>
+           </color>
+          </brush>
+         </property>
+        </item>
+        <item row="0" column="4">
+         <property name="text">
+          <string/>
+         </property>
+         <property name="background">
+          <brush brushstyle="SolidPattern">
+           <color alpha="120">
+            <red>0</red>
+            <green>150</green>
+            <blue>0</blue>
+           </color>
+          </brush>
+         </property>
         </item>
         <item row="0" column="5">
          <property name="text">
           <string>Првоерить о местонахождении в 13:00</string>
+         </property>
+         <property name="background">
+          <brush brushstyle="SolidPattern">
+           <color alpha="120">
+            <red>0</red>
+            <green>150</green>
+            <blue>0</blue>
+           </color>
+          </brush>
+         </property>
+        </item>
+        <item row="1" column="0">
+         <property name="text">
+          <string/>
+         </property>
+        </item>
+        <item row="1" column="2">
+         <property name="text">
+          <string>цех №8</string>
+         </property>
+         <property name="font">
+          <font>
+           <underline>false</underline>
+           <strikeout>false</strikeout>
+          </font>
+         </property>
+         <property name="background">
+          <brush brushstyle="SolidPattern">
+           <color alpha="120">
+            <red>0</red>
+            <green>150</green>
+            <blue>0</blue>
+           </color>
+          </brush>
+         </property>
+        </item>
+        <item row="1" column="3">
+         <property name="text">
+          <string>15:00</string>
+         </property>
+         <property name="background">
+          <brush brushstyle="SolidPattern">
+           <color alpha="120">
+            <red>0</red>
+            <green>150</green>
+            <blue>0</blue>
+           </color>
+          </brush>
+         </property>
+        </item>
+        <item row="1" column="4">
+         <property name="text">
+          <string/>
+         </property>
+         <property name="background">
+          <brush brushstyle="SolidPattern">
+           <color alpha="120">
+            <red>0</red>
+            <green>150</green>
+            <blue>0</blue>
+           </color>
+          </brush>
+         </property>
+        </item>
+        <item row="1" column="5">
+         <property name="text">
+          <string/>
+         </property>
+         <property name="background">
+          <brush brushstyle="SolidPattern">
+           <color alpha="120">
+            <red>0</red>
+            <green>150</green>
+            <blue>0</blue>
+           </color>
+          </brush>
+         </property>
+        </item>
+        <item row="2" column="0">
+         <property name="text">
+          <string>УАЗ 469</string>
+         </property>
+         <property name="background">
+          <brush brushstyle="SolidPattern">
+           <color alpha="120">
+            <red>0</red>
+            <green>0</green>
+            <blue>150</blue>
+           </color>
+          </brush>
+         </property>
+        </item>
+        <item row="2" column="1">
+         <property name="text">
+          <string>Путров П.П.</string>
+         </property>
+         <property name="background">
+          <brush brushstyle="SolidPattern">
+           <color alpha="120">
+            <red>0</red>
+            <green>0</green>
+            <blue>150</blue>
+           </color>
+          </brush>
+         </property>
+        </item>
+        <item row="2" column="2">
+         <property name="text">
+          <string>Город, КУйбышева 81</string>
+         </property>
+         <property name="background">
+          <brush brushstyle="SolidPattern">
+           <color alpha="120">
+            <red>0</red>
+            <green>0</green>
+            <blue>150</blue>
+           </color>
+          </brush>
+         </property>
+        </item>
+        <item row="2" column="3">
+         <property name="text">
+          <string>9:15</string>
+         </property>
+         <property name="background">
+          <brush brushstyle="SolidPattern">
+           <color alpha="120">
+            <red>0</red>
+            <green>0</green>
+            <blue>150</blue>
+           </color>
+          </brush>
+         </property>
+        </item>
+        <item row="2" column="4">
+         <property name="text">
+          <string/>
+         </property>
+         <property name="background">
+          <brush brushstyle="SolidPattern">
+           <color alpha="120">
+            <red>0</red>
+            <green>0</green>
+            <blue>150</blue>
+           </color>
+          </brush>
+         </property>
+        </item>
+        <item row="2" column="5">
+         <property name="text">
+          <string/>
+         </property>
+         <property name="background">
+          <brush brushstyle="SolidPattern">
+           <color alpha="120">
+            <red>0</red>
+            <green>0</green>
+            <blue>150</blue>
+           </color>
+          </brush>
+         </property>
+        </item>
+        <item row="3" column="2">
+         <property name="text">
+          <string>г.Тюмен</string>
+         </property>
+         <property name="background">
+          <brush brushstyle="SolidPattern">
+           <color alpha="120">
+            <red>0</red>
+            <green>0</green>
+            <blue>150</blue>
+           </color>
+          </brush>
+         </property>
+        </item>
+        <item row="3" column="3">
+         <property name="text">
+          <string>18:00</string>
+         </property>
+         <property name="background">
+          <brush brushstyle="SolidPattern">
+           <color alpha="120">
+            <red>0</red>
+            <green>0</green>
+            <blue>150</blue>
+           </color>
+          </brush>
+         </property>
+        </item>
+        <item row="3" column="4">
+         <property name="text">
+          <string/>
+         </property>
+         <property name="background">
+          <brush brushstyle="SolidPattern">
+           <color alpha="120">
+            <red>0</red>
+            <green>0</green>
+            <blue>150</blue>
+           </color>
+          </brush>
+         </property>
+        </item>
+        <item row="3" column="5">
+         <property name="text">
+          <string/>
+         </property>
+         <property name="background">
+          <brush brushstyle="SolidPattern">
+           <color alpha="120">
+            <red>0</red>
+            <green>0</green>
+            <blue>150</blue>
+           </color>
+          </brush>
          </property>
         </item>
        </widget>
@@ -232,7 +567,7 @@
      <x>0</x>
      <y>0</y>
      <width>1303</width>
-     <height>20</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu">
@@ -243,6 +578,7 @@
     <addaction name="newAuto"/>
     <addaction name="separator"/>
     <addaction name="fixed_drivers"/>
+    <addaction name="customers"/>
    </widget>
    <widget class="QMenu" name="menu_2">
     <property name="title">
@@ -313,6 +649,11 @@
   <action name="fixed_drivers">
    <property name="text">
     <string>Закрепление водителя</string>
+   </property>
+  </action>
+  <action name="customers">
+   <property name="text">
+    <string>Заказчики</string>
    </property>
   </action>
  </widget>

@@ -3,6 +3,9 @@ import os
 
 
 class SqlLiteDb:
+    """
+    Класс для работы с БД Диспетчер
+    """
     def __init__(self):
         path = os.path.abspath(os.curdir)
         if os.path.isfile(path + '\\DispatcherBase.db'):
@@ -14,7 +17,22 @@ class SqlLiteDb:
             print('Создаю новую БД')
             self.connection_db = sqlite3.connect(path + '\\DispatcherBase.db')
 
+    def delete_customer(self, param):
+        try:
+            cursor = self.connection_db.cursor()
+            cursor.execute("delete from customers where id_customer = :id_customer", [param])
+            cursor.close()
+            self.connection_db.commit()
+        except Exception as e:
+            print('Error: dbClass->delete_customer() ' + str(e))
+
     def insert_new_customer(self, param):
+        """
+        Метод добавления нового заказчика в таблицу заказчиков
+
+        :param param: Наименование заказчика
+        :type param: str
+        """
         try:
             cursor = self.connection_db.cursor()
             cursor.execute("insert into customers(name_customer) "

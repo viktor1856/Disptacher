@@ -3,6 +3,9 @@ import os
 
 
 class SqlLiteDb:
+    """
+    Класс для работы с БД Диспетчер
+    """
     def __init__(self):
         path = os.path.abspath(os.curdir)
         if os.path.isfile(path + '\\DispatcherBase.db'):
@@ -14,19 +17,102 @@ class SqlLiteDb:
             print('Создаю новую БД')
             self.connection_db = sqlite3.connect(path + '\\DispatcherBase.db')
 
+    def update_customer(self, params):
+        try:
+            cursor = self.connection_db.cursor()
+            cursor.execute("update customers set name_customer=:name_customer where "
+                           "id_customer = :id_customer ", params)
+            cursor.close()
+            self.connection_db.commit()
+        except Exception as e:
+            print('Error: dbClass->update_customer() ' + str(e))
+
+    def delete_customer(self, param):
+        try:
+            cursor = self.connection_db.cursor()
+            cursor.execute("delete from customers where id_customer = :id_customer", [param])
+            cursor.close()
+            self.connection_db.commit()
+        except Exception as e:
+            print('Error: dbClass->delete_customer() ' + str(e))
+
+    def insert_new_customer(self, param):
+        """
+        Метод добавления нового заказчика в таблицу заказчиков
+
+        :param param: Наименование заказчика
+        :type param: str
+        """
+        try:
+            cursor = self.connection_db.cursor()
+            cursor.execute("insert into customers(name_customer) "
+                           "values(:name_customer)", [param])
+            cursor.close()
+            self.connection_db.commit()
+        except Exception as e:
+            print('Error: dbClass->insert_new_customer() ' + str(e))
+
+    def select_all_customers(self):
+        try:
+            cursor = self.connection_db.cursor()
+            cursor.execute('select * from customers')
+            customers_list = cursor.fetchall()
+            cursor.close()
+            return customers_list
+        except Exception as e:
+            print('Error: db_class->select_all_customers ' + str(e))
+
+    def select_auto_info(self, id_auto):
+        try:
+            cursor = self.connection_db.cursor()
+            cursor.execute('select * from autos where id_auto = :id_auto', [id_auto])
+            auto_info = cursor.fetchone()
+            cursor.close()
+            return auto_info
+        except Exception as e:
+            print('Error: db_class->select_auto_info ' + str(e))
+
+    def update_auto(self, params):
+        try:
+            cursor = self.connection_db.cursor()
+            cursor.execute("update autos set name_auto = :name_auto ,type_auto = :type_auto,"
+                           " category_drivers = :category_drivers, skzi = :skzi, estr = :estr,"
+                           "gos_number = :gos_number  where "
+                           "id_auto = :id_auto ", params)
+            cursor.close()
+            self.connection_db.commit()
+        except Exception as e:
+            print('Error: dbClass->update_auto() ' + str(e))
+
+    def delete_auto(self, param):
+        cursor = self.connection_db.cursor()
+        cursor.execute("delete from autos where id_auto = :id_auto", param)
+        cursor.close()
+        self.connection_db.commit()
+
+    def insert_new_auto(self, param):
+        try:
+            cursor = self.connection_db.cursor()
+            cursor.execute("insert into autos(name_auto,type_auto, category_drivers, skzi, estr,"
+                           "gos_number ) "
+                           "values(:name_auto, :type_auto, :category, :skzi, :estr,"
+                           ":gos_number)", param)
+            cursor.close()
+            self.connection_db.commit()
+        except Exception as e:
+            print('Error: dbClass->insert_new_auto() ' + str(e))
+
     def select_category_auto(self, param):
         try:
             cursor = self.connection_db.cursor()
             if param == 'Прочее':
-                cursor.execute("select name from dictionary where kod_dict in (2,3)"
+                cursor.execute("select name,shifr from dictionary where kod_dict in (2,3)"
                                "order by name")
             else:
-                cursor.execute('select name from dictionary where id_parent =('
+                cursor.execute('select name, shifr from dictionary where id_parent =('
                                'select id_dict from dictionary where kod_dict  = 1 and '
                                ' name = :param) order by name', [param])
-            list_category_type = []
-            for category in cursor.fetchall():
-                list_category_type.append(category[0])
+            list_category_type = cursor.fetchall()
             cursor.close()
             return list_category_type
         except Exception as e:
@@ -35,7 +121,7 @@ class SqlLiteDb:
     def select_auto_type(self):
         try:
             cursor = self.connection_db.cursor()
-            cursor.execute('select name from dictionary where kod_dict = 1 order by name desc')
+            cursor.execute('select  name from dictionary where kod_dict = 1 order by name desc')
             list_auto_type = []
             for auto_type in cursor.fetchall():
                 list_auto_type.append(auto_type[0])
@@ -103,7 +189,7 @@ class SqlLiteDb:
 def main():
 
     test = SqlLiteDb()
-    sp = test.select_category_auto('')
+    sp = test.select_category_auto('Легковое ТС')
     print(sp)
 
 

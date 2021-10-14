@@ -17,6 +17,16 @@ class SqlLiteDb:
             print('Создаю новую БД')
             self.connection_db = sqlite3.connect(path + '\\DispatcherBase.db')
 
+    def update_customer(self, params):
+        try:
+            cursor = self.connection_db.cursor()
+            cursor.execute("update customers set name_customer=:name_customer where "
+                           "id_customer = :id_customer ", params)
+            cursor.close()
+            self.connection_db.commit()
+        except Exception as e:
+            print('Error: dbClass->update_customer() ' + str(e))
+
     def delete_customer(self, param):
         try:
             cursor = self.connection_db.cursor()

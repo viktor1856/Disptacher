@@ -19,9 +19,16 @@ class SqlLiteDb:
 
     def get_task_day(self, param):
         try:
-            print(param)
             cursor = self.connection_db.cursor()
-            cursor.execute('select * from task where Calendar = :date_calendar', [param])
+            sql_text = ('select task.id_task, autos.name_auto, drivers.fam, drivers.nam, drivers.patr, task.text_task, '
+                        'task.begin_work, customers.name_customer '
+                        'from task '
+                        'join drivers  on task.id_driver = drivers.id_driver '
+                        'join autos on task.id_auto = autos.id_auto '
+                        'join customers on task.customer_id = customers.id_customer '                            
+                        'where Calendar = :date_calendar '
+                        'order by autos.name_auto')
+            cursor.execute(sql_text, [param])
             task_list = cursor.fetchall()
             cursor.close()
             return task_list

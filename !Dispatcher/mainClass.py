@@ -1,4 +1,6 @@
 import sys
+
+import PyQt5.QtCore
 from PyQt5 import QtWidgets
 from PyQt5.QtCore import QTranslator, QLocale
 from mainForm import Ui_MainWindow
@@ -17,6 +19,15 @@ class MainClass(QtWidgets.QMainWindow, Ui_MainWindow):
         self.newDriver.triggered.connect(self.list_drivers_form)
         self.customers.triggered.connect(self.list_customers)
         # self.newAuto.triggered.connect(self.newAuto)
+        self.calendarWidget.clicked.connect(self.get_task_day)
+        self.get_task_day()
+
+    def get_task_day(self):
+        all_task_day = self.connectDb.get_task_day(self.calendarWidget.selectedDate().toString('dd.MM.yyyy'))
+        self.label.setText('Техника на ' + self.calendarWidget.selectedDate().toString('dd.MM.yyyy'))
+        self.label_2.setText('Напоминания на ' + self.calendarWidget.selectedDate().toString('dd.MM.yyyy'))
+        # print(self.calendarWidget.selectedDate().toString('dd.MM.yyyy'))
+        print(all_task_day)
 
     def list_customers(self):
         form = ListCustomersClass(self.connectDb)

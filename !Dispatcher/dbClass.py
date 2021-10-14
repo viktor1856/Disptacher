@@ -17,6 +17,17 @@ class SqlLiteDb:
             print('Создаю новую БД')
             self.connection_db = sqlite3.connect(path + '\\DispatcherBase.db')
 
+    def get_task_day(self, param):
+        try:
+            print(param)
+            cursor = self.connection_db.cursor()
+            cursor.execute('select * from task where Calendar = :date_calendar', [param])
+            task_list = cursor.fetchall()
+            cursor.close()
+            return task_list
+        except Exception as e:
+            print('Error: db_class->get_task_day ' + str(e))
+
     def update_customer(self, params):
         try:
             cursor = self.connection_db.cursor()

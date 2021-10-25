@@ -8,22 +8,32 @@ class NewTask(QDialog, Ui_newTask):
         super().__init__()
         self.setupUi(self)
         self.connect_db = in_connect_db
+        self.date_task = in_date_task
         self.setWindowTitle('Новая задача на ' + in_date_task)
         times = datetime.datetime.now()
         self.timeEdit.setTime(times.time())
         self.set_all_info_in_combobox()
-        self.checkBox.setChecked(False)
+        # self.checkBox.setChecked(False)
         self.checkBox.stateChanged.connect(self.set_visible_remaind)
         self.dateTimeEdit.hide()
         self.label_6.hide()
         self.textEdit_2.hide()
 
     def accept(self):
-        pass
+        # self.cat_auto.itemData(self.cat_auto.currentIndex())
+        all_param_for_insert = [self.comboBox.itemData(self.comboBox.currentIndex()),
+                                self.comboBox_2.itemData(self.comboBox_2.currentIndex()),
+                                self.textEdit.toPlainText(),
+                                self.timeEdit.time().toString('H:mm'),
+                                self.comboBox_3.itemData(self.comboBox_3.currentIndex()),
+                                self.date_task]
+
+        self.connect_db.insert_new_task(all_param_for_insert)
+        super(NewTask, self).accept()
 
     def set_all_info_in_combobox(self):
         all_autos_list = self.connect_db.select_all_autos()
-        print(all_autos_list)
+        # print(all_autos_list)
         for auto in all_autos_list:
             self.comboBox.addItem(auto[1] + ' ' + auto[2], auto[0])
 

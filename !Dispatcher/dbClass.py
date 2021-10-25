@@ -17,6 +17,24 @@ class SqlLiteDb:
             print('Создаю новую БД')
             self.connection_db = sqlite3.connect(path + '\\DispatcherBase.db')
 
+    def insert_new_task(self, param: list):
+        """
+                Метод добавления новой задачи на выбраное число в календаре
+
+                :param param: Список параметорв(ид ТС, ид водитель, текст задачи, время задачи, ид заказчик,
+                календарная дата)
+                :type param: str
+                """
+        try:
+
+            cursor = self.connection_db.cursor()
+            cursor.execute("insert into task(id_auto, id_driver, text_task, begin_work, customer_id, calendar) "
+                           "values(:id_auto, :id_driver, :text_task, :begin_work, :customer_id, :calendar)", param)
+            cursor.close()
+            self.connection_db.commit()
+        except Exception as e:
+            print('Error: dbClass->insert_new_task() ' + str(e))
+
     def get_task_day(self, param: str) -> list:
         """
          Возвращает список задач на указанную дату
@@ -36,7 +54,7 @@ class SqlLiteDb:
                         'join autos on task.id_auto = autos.id_auto '
                         'join customers on task.customer_id = customers.id_customer '                            
                         'where Calendar = :date_calendar '
-                        'order by autos.name_auto')
+                        'order by autos.name_auto, drivers.fam,drivers.nam,drivers.patr')
             cursor.execute(sql_text, [param])
             task_list = cursor.fetchall()
             cursor.close()

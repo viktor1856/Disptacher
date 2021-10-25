@@ -29,7 +29,8 @@ class MainClass(QtWidgets.QMainWindow, Ui_MainWindow):
     def create_task_form(self):
         try:
             form = NewTask(self.connectDb,self.calendarWidget.selectedDate().toString('dd.MM.yyyy'))
-            form.exec_()
+            if form.exec_() == form.Accepted:
+                self.get_task_day()
         except Exception as e:
             print('Error: mainClass->create_task_form() ' + str(e))
 
@@ -40,15 +41,19 @@ class MainClass(QtWidgets.QMainWindow, Ui_MainWindow):
         # print(self.calendarWidget.selectedDate().toString('dd.MM.yyyy'))
 
         all_task_day = self.connectDb.get_task_day(self.calendarWidget.selectedDate().toString('dd.MM.yyyy'))
-        print(all_task_day)
+        # print(all_task_day)
         row_task = 0
+        self.tableWidget.clear()
+        self.tableWidget.setHorizontalHeaderLabels(['Транспортное средство', 'Водитель', 'Задача', 'Начало работы',
+                                                    'Заказчик', 'Напоминание'])
         self.tableWidget.setRowCount(len(all_task_day))
         color_list = [QColor(0, 150, 0, 120), QColor(0, 0, 150, 120)]
         index_color_list = 0
         memory_row = 0
         for task in all_task_day:
             if self.tableWidget.item(row_task-(1+memory_row), 0):
-                if self.tableWidget.item(row_task - (1+memory_row), 0).text() != str(task[1]):
+                if self.tableWidget.item(row_task - (1+memory_row), 0).text() != str(task[1]) or\
+                        self.tableWidget.item(row_task - (1+memory_row), 1).text() != str(task[2] + ' ' + task[3][0] + '.' + task[4][0] + '.'):
                     memory_row = 0
                     if index_color_list == 0:
                         index_color_list = 1

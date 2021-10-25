@@ -17,7 +17,16 @@ class SqlLiteDb:
             print('Создаю новую БД')
             self.connection_db = sqlite3.connect(path + '\\DispatcherBase.db')
 
-    def get_task_day(self, param):
+    def get_task_day(self, param: str) -> list:
+        """
+         Возвращает список задач на указанную дату
+
+        :param param: Дата в формате 'дд.мм.гггг'
+
+        :return: список задач на заданное число
+
+
+        """
         try:
             cursor = self.connection_db.cursor()
             sql_text = ('select task.id_task, autos.name_auto, drivers.fam, drivers.nam, drivers.patr, task.text_task, '

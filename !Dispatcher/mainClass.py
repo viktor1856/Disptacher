@@ -10,6 +10,7 @@ from dbClass import SqlLiteDb
 from ListDriverClass import ListDriverClass
 from ListAutoClass import ListAutoClass
 from ListCustomersClass import ListCustomersClass
+from NewTaskClass import NewTask
 
 
 class MainClass(QtWidgets.QMainWindow, Ui_MainWindow):
@@ -20,13 +21,22 @@ class MainClass(QtWidgets.QMainWindow, Ui_MainWindow):
         self.newAuto.triggered.connect(self.list_auto_form)
         self.newDriver.triggered.connect(self.list_drivers_form)
         self.customers.triggered.connect(self.list_customers)
+        self.pushButton_2.clicked.connect(self.create_task_form)
         # self.newAuto.triggered.connect(self.newAuto)
         self.calendarWidget.clicked.connect(self.get_task_day)
         self.get_task_day()
 
+    def create_task_form(self):
+        try:
+            form = NewTask(self.connectDb,self.calendarWidget.selectedDate().toString('dd.MM.yyyy'))
+            form.exec_()
+        except Exception as e:
+            print('Error: mainClass->create_task_form() ' + str(e))
+
     def get_task_day(self):
         self.label.setText('Техника на ' + self.calendarWidget.selectedDate().toString('dd.MM.yyyy'))
         self.label_2.setText('Напоминания на ' + self.calendarWidget.selectedDate().toString('dd.MM.yyyy'))
+        self.pushButton_2.setText('Новая задача на ' + self.calendarWidget.selectedDate().toString('dd.MM.yyyy'))
         # print(self.calendarWidget.selectedDate().toString('dd.MM.yyyy'))
 
         all_task_day = self.connectDb.get_task_day(self.calendarWidget.selectedDate().toString('dd.MM.yyyy'))

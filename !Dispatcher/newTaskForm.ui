@@ -66,7 +66,11 @@
       </widget>
      </item>
      <item>
-      <widget class="QTimeEdit" name="timeEdit"/>
+      <widget class="QTimeEdit" name="timeEdit">
+       <property name="calendarPopup">
+        <bool>false</bool>
+       </property>
+      </widget>
      </item>
      <item>
       <widget class="QLabel" name="label_5">
@@ -107,8 +111,17 @@
      </item>
      <item>
       <widget class="QDateTimeEdit" name="dateTimeEdit">
+       <property name="wrapping">
+        <bool>false</bool>
+       </property>
        <property name="buttonSymbols">
         <enum>QAbstractSpinBox::UpDownArrows</enum>
+       </property>
+       <property name="showGroupSeparator" stdset="0">
+        <bool>true</bool>
+       </property>
+       <property name="calendarPopup">
+        <bool>true</bool>
        </property>
       </widget>
      </item>

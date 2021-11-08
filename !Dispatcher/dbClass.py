@@ -17,6 +17,69 @@ class SqlLiteDb:
             print('Создаю новую БД')
             self.connection_db = sqlite3.connect(path + '\\DispatcherBase.db')
 
+    def select_repeat_fixed(self, params):
+        """
+        Проверка на уже существующее закрепление
+        0 - Такой связки нет
+        1 - авто имеет водителя
+        2 - водитель привязан к авто
+        3 - такое закрепление уже есть
+
+        :param params: [ид авто, ид водителя]
+        :type params: list
+        :return: Числовой код ответа проверки
+        :rtype: int
+        """
+        try:
+            cursor = self.connection_db.cursor()
+            param = params[0]
+            cursor.execute("select * from fixed_drivers where id_auto = :id_auto", [param])
+            fixed_auto = cursor.fetchone()
+
+            param = params[1]
+            cursor.execute("select * from fixed_drivers where id_driver = :id_driver", [param])
+            fixed_driver = cursor.fetchone()
+            cursor.close()
+            if fixed_auto and fixed_driver:
+                return 3
+            elif fixed_driver:
+                return 2
+            elif fixed_auto:
+                return 1
+            else:
+                return 0
+        except Exception as e:
+            print('Error: dbClass->select_repeat_fixed() ' + str(e))
+
+    def insert_fixed_drivers(self, param):
+        """
+        Вставка закрепления водителя в таблицу fixed_driver
+
+        :param param: [id_auto,id_driver]
+        :type param: list
+        """
+        try:
+            cursor = self.connection_db.cursor()
+            cursor.execute("insert into fixed_drivers(id_auto, id_driver) "
+                           "values(:id_auto, :id_driver)", param)
+            cursor.close()
+            self.connection_db.commit()
+        except Exception as e:
+            print('Error: dbClass->insert_fixed_drivers() ' + str(e))
+
+    def select_all_fixed_drivers(self):
+        """
+        Получение списка всех зафиксированых водителей
+
+        :return: список [ID, ID ТС , ID водитель]
+        :rtype: list
+        """
+        cursor = self.connection_db.cursor()
+        cursor.execute("select * from fixed_drivers")
+        all_fixed_drivers = cursor.fetchall()
+        cursor.close()
+        return all_fixed_drivers
+
     def insert_new_task(self, param: list):
         """
                 Метод добавления новой задачи на выбраное число в календаре
@@ -193,14 +256,15 @@ class SqlLiteDb:
 
     def select_all_drivers(self):
         cursor = self.connection_db.cursor()
-        cursor.execute("select id_driver, fam, nam, patr, date_birth from drivers")
+        cursor.execute("select id_driver, fam, nam, patr, date_birth,category_auto, category_tractor, "
+                       "skzi, estr, skzi_date, estr_date from drivers")
         all_drivers = cursor.fetchall()
         cursor.close()
         return all_drivers
 
     def select_all_autos(self):
         cursor = self.connection_db.cursor()
-        cursor.execute("select id_auto, gos_number, name_auto from autos")
+        cursor.execute("select id_auto, gos_number, name_auto, category_drivers, SKZI, ESTR from autos")
         all_autos = cursor.fetchall()
         cursor.close()
         return all_autos

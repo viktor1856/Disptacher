@@ -23,7 +23,23 @@
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
-      <widget class="QTableWidget" name="fixedDriverTable"/>
+      <widget class="QTableWidget" name="fixedDriverTable">
+       <column>
+        <property name="text">
+         <string>№</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>Транспортное средство</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>Водитель</string>
+        </property>
+       </column>
+      </widget>
      </item>
      <item>
       <layout class="QVBoxLayout" name="verticalLayout">
@@ -81,5 +97,22 @@
   </layout>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>accepted()</signal>
+   <receiver>FixedDriverList</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>258</x>
+     <y>396</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>162</x>
+     <y>405</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

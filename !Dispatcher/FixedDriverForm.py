@@ -22,8 +22,14 @@ class Ui_FixedDriverList(object):
         self.horizontalLayout.setObjectName("horizontalLayout")
         self.fixedDriverTable = QtWidgets.QTableWidget(FixedDriverList)
         self.fixedDriverTable.setObjectName("fixedDriverTable")
-        self.fixedDriverTable.setColumnCount(0)
+        self.fixedDriverTable.setColumnCount(3)
         self.fixedDriverTable.setRowCount(0)
+        item = QtWidgets.QTableWidgetItem()
+        self.fixedDriverTable.setHorizontalHeaderItem(0, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.fixedDriverTable.setHorizontalHeaderItem(1, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.fixedDriverTable.setHorizontalHeaderItem(2, item)
         self.horizontalLayout.addWidget(self.fixedDriverTable)
         self.verticalLayout = QtWidgets.QVBoxLayout()
         self.verticalLayout.setObjectName("verticalLayout")
@@ -47,11 +53,18 @@ class Ui_FixedDriverList(object):
         self.verticalLayout_2.addWidget(self.buttonBox)
 
         self.retranslateUi(FixedDriverList)
+        self.buttonBox.accepted.connect(FixedDriverList.accept)
         QtCore.QMetaObject.connectSlotsByName(FixedDriverList)
 
     def retranslateUi(self, FixedDriverList):
         _translate = QtCore.QCoreApplication.translate
         FixedDriverList.setWindowTitle(_translate("FixedDriverList", "Закрепление водителя"))
+        item = self.fixedDriverTable.horizontalHeaderItem(0)
+        item.setText(_translate("FixedDriverList", "№"))
+        item = self.fixedDriverTable.horizontalHeaderItem(1)
+        item.setText(_translate("FixedDriverList", "Транспортное средство"))
+        item = self.fixedDriverTable.horizontalHeaderItem(2)
+        item.setText(_translate("FixedDriverList", "Водитель"))
         self.insertFixedDriver.setText(_translate("FixedDriverList", "Закрепить\n"
 "водителя"))
         self.udapeFixedDriver.setText(_translate("FixedDriverList", "Изменить\n"

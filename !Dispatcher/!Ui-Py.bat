@@ -5,3 +5,5 @@ pyuic5 -x listDriverForm.ui -o listDriverForm.py
 pyuic5 -x listAutoForm.ui -o listAutoForm.py
 pyuic5 -x customerListForm.ui -o customerListForm.py
 pyuic5 -x newTaskForm.ui -o newTaskForm.py
+pyuic5 -x FixedDriverForm.ui -o FixedDriverForm.py
+pyuic5 -x addDixDriverForm.ui -o addFixDriverForm.py

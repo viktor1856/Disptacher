@@ -6,9 +6,15 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>608</width>
+    <width>484</width>
     <height>414</height>
    </rect>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>608</width>
+    <height>414</height>
+   </size>
   </property>
   <property name="windowTitle">
    <string>Закрепление водителя</string>
@@ -17,53 +23,33 @@
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
-      <widget class="QTableWidget" name="fixedDriverTable">
-       <property name="maximumSize">
-        <size>
-         <width>300</width>
-         <height>16777215</height>
-        </size>
-       </property>
-      </widget>
+      <widget class="QTableWidget" name="fixedDriverTable"/>
      </item>
      <item>
       <layout class="QVBoxLayout" name="verticalLayout">
        <item>
-        <widget class="QLabel" name="labelAuto">
+        <widget class="QPushButton" name="insertFixedDriver">
          <property name="text">
-          <string>Транспортное средство</string>
+          <string>Закрепить
+водителя</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QComboBox" name="comboBoxAuto"/>
-       </item>
-       <item>
-        <widget class="QLabel" name="labelDriver">
+        <widget class="QPushButton" name="udapeFixedDriver">
          <property name="text">
-          <string>Водитель</string>
+          <string>Изменить
+закрепление</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QComboBox" name="comboBoxSriver"/>
-       </item>
-       <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_3">
-         <item>
-          <widget class="QPushButton" name="fixedDriverButton">
-           <property name="maximumSize">
-            <size>
-             <width>70</width>
-             <height>16777215</height>
-            </size>
-           </property>
-           <property name="text">
-            <string>Закрепить</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
+        <widget class="QPushButton" name="deleteFixedDriver">
+         <property name="text">
+          <string>Удалить
+закрепление</string>
+         </property>
+        </widget>
        </item>
        <item>
         <spacer name="verticalSpacer">

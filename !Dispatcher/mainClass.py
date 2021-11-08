@@ -11,6 +11,7 @@ from ListDriverClass import ListDriverClass
 from ListAutoClass import ListAutoClass
 from ListCustomersClass import ListCustomersClass
 from NewTaskClass import NewTask
+from FixedDriverClass import FixedDriverClass
 
 
 class MainClass(QtWidgets.QMainWindow, Ui_MainWindow):
@@ -22,9 +23,17 @@ class MainClass(QtWidgets.QMainWindow, Ui_MainWindow):
         self.newDriver.triggered.connect(self.list_drivers_form)
         self.customers.triggered.connect(self.list_customers)
         self.pushButton_2.clicked.connect(self.create_task_form)
+        self.fixed_drivers.triggered.connect(self.create_fixed_driver_form)
         # self.newAuto.triggered.connect(self.newAuto)
         self.calendarWidget.clicked.connect(self.get_task_day)
         self.get_task_day()
+
+    def create_fixed_driver_form(self):
+        try:
+            form = FixedDriverClass(self.connectDb)
+            form.exec_()
+        except Exception as e:
+            print('Error: mainClass->create_fixed_river_form() ' + str(e))
 
     def create_task_form(self):
         try:

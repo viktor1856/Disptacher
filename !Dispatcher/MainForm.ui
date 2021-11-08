@@ -595,8 +595,9 @@
     <addaction name="newDriver"/>
     <addaction name="newAuto"/>
     <addaction name="separator"/>
-    <addaction name="fixed_drivers"/>
     <addaction name="customers"/>
+    <addaction name="separator"/>
+    <addaction name="fixed_drivers"/>
    </widget>
    <widget class="QMenu" name="menu_2">
     <property name="title">
